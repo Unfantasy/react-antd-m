@@ -6,7 +6,7 @@ import React from 'react';
 import { Router, Route, browserHistory } from 'react-router';
 import { ROUTE_PATH } from '../constants';
 
-import Index from '../components/index';
+import Index from '../pages/index';
 
 export default (
   <Router history={browserHistory}>

@@ -19,11 +19,15 @@ const otherPlugins = process.argv[1].indexOf('webpack-dev-server') >= 0 ? [] : [
 module.exports = {
   devtool: 'source-map', // or 'inline-source-map'
   devServer: {
+    host: '0.0.0.0',
+    port: '8000',
+    hot: true,
+    open: true,
     disableHostCheck: true,
     historyApiFallback: true
   },
 
-  entry: { fetch: 'whatwg-fetch', "index": path.resolve(__dirname, 'src/entries/index') },
+  entry: { fetch: 'whatwg-fetch', "index": path.resolve(__dirname, 'src/entry/index') },
 
   output: {
     filename: '[name].js',
@@ -69,10 +73,7 @@ module.exports = {
       // svg-sprite for antd-mobile@1.0
       { test: /\.(svg)$/i, loader: 'svg-sprite', include: [
         require.resolve('antd-mobile').replace(/warn\.js$/, ''),  // 1. 属于 antd-mobile 内置 svg 文件
-        // path.resolve(__dirname, 'src/my-project-svg-foler'),  // 自己私人的 svg 存放目录
       ]},
-      // { test: /\.css$/, loader: 'style!css' }, // 把css处理成内联style，动态插入到页面
-      // { test: /\.less$/i, loader: ExtractTextPlugin.extract('style', 'css!postcss!less') },
       { test: /\.scss|sass/i, loader: ExtractTextPlugin.extract('style', 'css!postcss!sass') },
       { test: /\.css$/i, loader: ExtractTextPlugin.extract('style', 'css!postcss') }
     ]
